@@ -1,0 +1,170 @@
+
+<!-- side menu -->
+<aside class="side-nav" id="show-side-navigation1">
+    <i class="fa fa-bars close-aside hidden-sm hidden-md hidden-lg" data-close="show-side-navigation1"></i>
+    <div class="heading">
+      <img src="{{userData.profile}}"
+        alt="">
+      <div class="info">
+        <h3>
+          <a href="#">{{userData.FirstName}} {{userData.LastName}}</a>
+        </h3>
+        <p>{{userData.Email}}</p>
+      </div>
+    </div>
+    <ul class="categories">
+      <li> <a [routerLink]="['/dashboard']">Dashboard</a> </li>
+      <li> <a>Settings</a></li>
+      <li (click)="logout()">Logout</li>
+    </ul>
+  </aside>
+<!-- end of side menu -->
+
+<!-- main content -->
+  <section id="contents">
+  
+    <div class="welcome">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="content">
+              <h2>Dashboard</h2>
+              <p>Version 1.0</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <section class="charts chart-height">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Widget</button>
+          </div>
+
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-info" (click)="saveWidgets()">Save</button>
+          </div>
+
+          <div class="col-sm-2" style="margin-bottom: 2%">
+             <input class="form-control" [(ngModel)]="filter.from" name="from" type="date">
+           </div>
+          <div class="col-sm-2" style="margin-bottom: 2%">
+               <input class="form-control" [(ngModel)]="filter.to" name="to" type="date">
+           </div>
+          <div class="col-sm-2">
+              <button class="btn btn-info" (click)="filterGraph()">Filter Graph</button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let chart of charts; let i = index">
+            <div class="col-md-6">
+              <div class="chart-container">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <h3>Chart</h3>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="dropdown">
+                      <span data-toggle="dropdown" class="glyphicon glyphicon-option-vertical"></span>
+                      <ul class="dropdown-menu">
+                        <li (click)="setCurrentIndex(i)" data-toggle="modal" #selectedWidget data-target="#deleteChart">
+                          <a>Edit</a>
+                        </li>
+                        <li (click)="deleteGraph(i)">
+                          <a>Delete</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div [(chart)]="charts[i]"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+  
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Widget</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <label for="email">Widget Name:</label>
+                    <input [(ngModel)]="graphTitle" type="text" name="graphTitle" placeholder="Widget Name">
+                </div>
+                <div class="form-group">
+                    <label for="sel1">Select type of widget:</label>
+                    <select [(ngModel)]="selectedValue" class="form-control" id="sel1" name="selectedValue">
+                      <option value="column">column</option>
+                      <option value="areaspline">areaspline</option>
+                      <option value="spline">spline</option>
+                    </select>
+                </div>
+                <button data-dismiss="modal" (click)="createNewGraph()">Add Widget</button>
+            </form>
+           
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <!-- delete chart modal -->
+
+    <!-- Modal -->
+    <div id="deleteChart" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+  
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Update Widget</h4>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                      <label for="email">Widget Name:</label>
+                      <input [(ngModel)]="graphTitle" type="text" name="graphTitle" placeholder="Widget Name">
+                  </div>
+                  <div class="form-group">
+                      <label for="sel1">Select type of widget:</label>
+                      <select [(ngModel)]="selectedValue" class="form-control" id="sel1" name="selectedValue">
+                        <option value="column">column</option>
+                        <option value="areaspline">areaspline</option>
+                        <option value="spline">spline</option>
+                      </select>
+                  </div>
+                  <button data-dismiss="modal" (click)="updateGraph(selectedWidget)">Update Widget</button>
+              </form>
+ 
+  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <!-- end of delete chart modal -->
+  
+  
+  </section>
+
+  <!-- end of content -->
