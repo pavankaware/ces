@@ -14,6 +14,12 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Live version of website is deployed as a heroku app at https://ces-assignment.herokuapp.com/
 
+
+## Login details
+any valid email and 6 digit password will work
+eg. adam@gmail.com
+password: 123456
+
 ## About Packages 
 
 **angular -jwt for authentication**
