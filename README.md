@@ -12,7 +12,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Live site url 
 
-Live version of website is deployed as a heroku app at https://www.npmjs.com/package/angular-highcharts
+Live version of website is deployed as a heroku app at https://ces-assignment.herokuapp.com/
 
 ## About Packages 
 
